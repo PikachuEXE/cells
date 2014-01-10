@@ -1,5 +1,6 @@
 require 'active_support/concern'
 require 'active_support/cache'
+require 'cell/caching/template_digestor'
 
 module Cell
   module Caching
