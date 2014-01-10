@@ -41,13 +41,18 @@ class TemplateFinderTest < MiniTest::Spec
       assert_equal @class.find('yell', @cell, format: :html).source, template.source
     end
 
-    it "returns digest for the template from inherited cell" do
+    it "returns digest for super class's template from inherited cell" do
       template = @lookup_context.find('bassist/promote', [], false)
       assert template.formats.include?(:html), "prepared template should have correct format but with #{template.formats}"
 
-      puts cell(:bad_guitarist)._prefixes
-
       assert_equal @class.find('promote', cell(:bad_guitarist), format: :html).source, template.source
+    end
+
+    it "returns digest for its own template from inherited cell if it has" do
+      template = @lookup_context.find('bad_guitarist/_dii', [], false)
+      assert template.formats.include?(:html), "prepared template should have correct format but with #{template.formats}"
+
+      assert_equal @class.find('_dii', cell(:bad_guitarist), format: :html).source, template.source
     end
 
     it "returns nil when template missing" do
