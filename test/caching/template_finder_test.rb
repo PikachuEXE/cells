@@ -56,7 +56,7 @@ class TemplateFinderTest < MiniTest::Spec
     end
 
     it "returns nil when template missing" do
-      assert_nil @class.find('groove', @bassist)
+      assert_raises (ActionView::MissingTemplate) { @class.find('groove', @bassist) }
     end
   end
 end

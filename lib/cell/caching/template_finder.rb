@@ -15,9 +15,7 @@ module Cell
       end
 
       def find
-        template
-      rescue ActionView::MissingTemplate
-        nil
+        finder.find(logical_name, prefixes, partial?)
       end
 
       private
@@ -39,10 +37,6 @@ module Cell
 
         def finder
           cell.lookup_context
-        end
-
-        def template
-          @template ||= finder.find(logical_name, prefixes, partial?)
         end
     end
   end
