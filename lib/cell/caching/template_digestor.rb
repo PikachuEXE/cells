@@ -51,7 +51,7 @@ module Cell
         end
 
         def template
-          @template ||= finder.find(logical_name, [], partial?)
+          @template ||= finder.find(name_for_look_up, [], partial?)
         end
     end
   end

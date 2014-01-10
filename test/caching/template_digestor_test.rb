@@ -17,14 +17,21 @@ class TemplateDigestorTest < MiniTest::Spec
   end
 
   describe '.digest' do
-    it "returns digest string when template is present" do
+    it "returns digest when template is present" do
       template = @lookup_context.find('bassist/play.html', [], false)
       digest = Digest::MD5.hexdigest(template.source)
 
       assert_equal @class.digest('bassist/play', :html, @lookup_context), digest
     end
 
-    it "returns digest string for the template with correct format" do
+    it "returns digest for the template with correct format" do
+      template = @lookup_context.find('bassist/play.js', [], false)
+      digest = Digest::MD5.hexdigest(template.source)
+
+      assert_equal @class.digest('bassist/play', :js, @lookup_context), digest
+    end
+
+    it "returns differnet digest for a template with same name but differnet format" do
       template = @lookup_context.find('bassist/play.js', [], false)
       digest = Digest::MD5.hexdigest(template.source)
 
